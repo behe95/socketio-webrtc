@@ -25,6 +25,8 @@ export default class SocketServer {
             let _this = this;
             console.log("Connected Socket ID ====================== ", socket.id);
 
+            socket.emit('clientSocketConnected', socket.id);
+
             socket.on('disconnect', this.onDisconnect);
 
         });
@@ -32,8 +34,7 @@ export default class SocketServer {
 
 
     private onDisconnect():void{
-        console.log("User disconnected");
-        
+        console.log("User disconnected");        
     }
 
 

@@ -1,26 +1,23 @@
 import React from 'react';
 import './App.css';
-import * as io from "socket.io-client";
-import axios from "axios";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from './components/Home/Home';
+import Room from './components/Room';
+import { SocketProvider } from './contexts/SocketContext';
 
-const ENDPOINT  = "http://localhost:5000/";
 
 function App() {
 
-  React.useEffect(() => {
-    const clientSocket = io.connect(ENDPOINT);
-    console.log(clientSocket);
-
-    
-
-    return () => {
-      
-    }
-  }, [])
   return (
-    <div className="App">
-      
-    </div>
+    <SocketProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/:id" component={Room} />
+        </Switch>
+      </BrowserRouter>
+
+    </SocketProvider>
   );
 }
 
